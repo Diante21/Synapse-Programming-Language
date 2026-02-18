@@ -145,15 +145,24 @@ result = double(21)
     def test_vector_operations(self):
         runtime = Runtime()
         source = '''
-vec = embed("test document")
-vector.store("docs", vec)
-results = vector.search("docs", vec, 1)
+vec1 = embed("machine learning algorithms")
+vector.store("docs", vec1)
+
+vec2 = embed("deep neural networks")
+vector.store("docs", vec2)
+
+# Search with a different query
+query_vec = embed("artificial intelligence")
+results = vector.search("docs", query_vec, 2)
 '''
         runtime.run(source)
         results = runtime.globals['results']
         
         self.assertIsInstance(results, list)
-        self.assertEqual(len(results), 1)
+        self.assertEqual(len(results), 2)
+        # Verify results are ordered by similarity
+        if len(results) >= 2:
+            self.assertGreaterEqual(results[0]['similarity'], results[1]['similarity'])
     
     def test_if_statement(self):
         runtime = Runtime()

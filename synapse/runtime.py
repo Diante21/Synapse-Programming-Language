@@ -60,7 +60,7 @@ class VectorDB:
         norm_b = sum(x * x for x in b) ** 0.5
         
         if norm_a == 0 or norm_b == 0:
-            return 0.0
+            raise ValueError("Cannot compute similarity for zero-length vectors")
         
         return dot_product / (norm_a * norm_b)
 
@@ -231,7 +231,8 @@ class Runtime:
         elif isinstance(node, ForLoop):
             iterable = await self.execute(node.iterable, env)
             for item in iterable:
-                local_env = env.copy()
+                import copy
+                local_env = copy.deepcopy(env)
                 local_env[node.variable] = item
                 for stmt in node.body:
                     await self.execute(stmt, local_env)
