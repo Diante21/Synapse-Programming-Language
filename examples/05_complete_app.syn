@@ -1,0 +1,35 @@
+# Example 5: Complete AI Application
+# Demonstrates all features working together
+
+# Function to analyze and store document
+async fn processDocument(text) {
+    # Generate summary using LLM
+    summary = await llm.gpt4("Summarize: " + text)
+    
+    # Create embeddings
+    doc_embedding = embed(text)
+    summary_embedding = embed(summary)
+    
+    # Store in vector database
+    vector.store("documents", doc_embedding)
+    vector.store("summaries", summary_embedding)
+    
+    return summary
+}
+
+# Process multiple documents
+doc1 = "Artificial intelligence is transforming the world..."
+doc2 = "Machine learning algorithms learn from data..."
+doc3 = "Neural networks are inspired by biological neurons..."
+
+summary1 = await processDocument(doc1)
+summary2 = await processDocument(doc2)
+summary3 = await processDocument(doc3)
+
+# Search for relevant documents
+user_query = "Tell me about AI"
+query_vec = embed(user_query)
+related_docs = vector.search("documents", query_vec, 3)
+
+# Generate response using streaming
+response = stream(prompt("Based on the context, answer: " + user_query))
