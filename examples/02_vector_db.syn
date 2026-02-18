@@ -1,0 +1,22 @@
+# Example 2: Built-in Vector DB Support
+# Demonstrates native vector database operations
+
+# Embed text content
+text1 = "The quick brown fox jumps over the lazy dog"
+embedding1 = embed(text1)
+
+# Store embeddings in vector database
+vector.store("documents", embedding1)
+
+text2 = "A fast brown animal leaps over a sleepy canine"
+embedding2 = embed(text2)
+vector.store("documents", embedding2)
+
+text3 = "Python is a programming language"
+embedding3 = embed(text3)
+vector.store("documents", embedding3)
+
+# Search for similar embeddings
+query = "animal jumping"
+query_embedding = embed(query)
+results = vector.search("documents", query_embedding, 2)

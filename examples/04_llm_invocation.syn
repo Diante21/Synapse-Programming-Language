@@ -1,0 +1,15 @@
+# Example 4: Direct LLM Invocation
+# Demonstrates calling different LLM models directly
+
+# Call specific LLM models
+gpt4_response = llm.gpt4("Explain machine learning")
+claude_response = llm.claude("What is deep learning?")
+llama_response = llm.llama("Describe neural networks")
+
+# LLM calls in conditionals
+question = "Is the sky blue?"
+answer = llm.gpt4(question)
+
+if (answer) {
+    conclusion = prompt("Summarize the answer")
+}

@@ -1,0 +1,12 @@
+# Example 1: Prompt Execution as First-Class Feature
+# Demonstrates using prompts as a native language construct
+
+# Simple prompt execution
+result = prompt("What is artificial intelligence?")
+
+# Using prompts in expressions
+greeting = prompt("Generate a friendly greeting")
+
+# Prompts can be assigned and passed around
+question = "Explain quantum computing in simple terms"
+answer = prompt(question)

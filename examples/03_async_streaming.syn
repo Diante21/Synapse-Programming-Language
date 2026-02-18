@@ -1,0 +1,14 @@
+# Example 3: Native Async + Streaming
+# Demonstrates async/await and streaming capabilities
+
+# Async function definition
+async fn fetchData(url) {
+    result = llm.gpt4("Fetch data from " + url)
+    return result
+}
+
+# Await async operations
+data = await fetchData("https://api.example.com/data")
+
+# Streaming LLM responses
+streamedResponse = stream(prompt("Write a long story about space exploration"))
